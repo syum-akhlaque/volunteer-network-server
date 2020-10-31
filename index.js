@@ -55,7 +55,8 @@ client.connect(err => {
     })
 
     app.get('/orgList', (req, res)=>{  // show all org in home page
-        orgCollection.find({})
+      const search = req.query.search;
+        orgCollection.find({orgName :{$regex: search }})
         .toArray( (err, documents) => {
           res.send(documents)
         } )
